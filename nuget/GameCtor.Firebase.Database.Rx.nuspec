@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>GameCtor.Firebase.Database.Rx</id>
+    <version>1.0.0</version>
+    <authors>Colt Alan Bauman</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Reactive extension wrappers for Xamarin's Firebase Database package (iOS and Android).</description>
+    <releaseNotes>Methods to read data from Firebase Database.</releaseNotes>
+    <copyright>Copyright © 2017 Colt Alan Bauman</copyright>
+    <dependencies>
+      <group targetFramework="Xamarin.iOS10">
+        <dependency id="Rx-Main" version="2.2.5" />
+        <dependency id="Xamarin.Firebase.iOS.Database" version="4.0.0.0" />
+      </group>
+      <group targetFramework="MonoAndroid70">
+        <dependency id="Rx-Main" version="2.2.5" />
+        <dependency id="Xamarin.Firebase.Database" version="42.1021.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+     <!--Xamarin.iOS-->
+     <file src="..\src\GameCtor.Firebase.iOS.Database.Rx\bin\Release\GameCtor.Firebase.iOS.Database.Rx.*" target="lib\Xamarin.iOS10" />
+
+     <!--Xamarin.Android-->
+     <file src="..\src\GameCtor.Firebase.Android.Database.Rx\bin\Release\GameCtor.Firebase.Android.Database.Rx.*" target="lib\MonoAndroid70" />
+  </files>
+</package>
