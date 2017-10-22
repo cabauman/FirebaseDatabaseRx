@@ -34,7 +34,7 @@ namespace GameCtor.Firebase.Database.Rx
                 .Zip()
                 .Select(snapshots =>
                 {
-                    return dbQueries.Zip(snapshots, (query, snap) => new { Key = query.Ref.Key, Value = snap }) // ************** Need to check key value
+                    return dbQueries.Zip(snapshots, (query, snap) => new { Key = query.GetUrl(), Value = snap })
                         .ToDictionary(x => x.Key, x => x.Value);
                 });
         }

@@ -4,11 +4,30 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Firebase.Database;
+using System.Text;
 
 namespace GameCtor.Firebase.Database.Rx
 {
     public static partial class DatabaseQueryExtensions
     {
+        /// <summary>
+        /// Get the relative url of the reference.
+        /// </summary>
+        /// <param name="dbQuery">The database query reference.</param>
+        /// <returns>Returns the reference url minus the root.</returns>
+        public static string GetUrl(this Query dbQuery)
+        {
+            StringBuilder sb = new StringBuilder(dbQuery.Ref.Key);
+            var current = dbQuery.Ref.Parent;
+            while(current != null && !string.IsNullOrEmpty(current.Key))
+            {
+                sb.Insert(0, string.Format("{0}/", current.Key));
+                current = current.Parent;
+            }
+
+            return sb.ToString();
+        }
+
         /// <summary>
         /// Equivalent to AddListenerForSingleValueEvent, except returns an IObservable for use with reactive extensions.
         /// </summary>

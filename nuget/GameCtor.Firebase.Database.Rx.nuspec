@@ -2,11 +2,15 @@
 <package >
   <metadata>
     <id>GameCtor.Firebase.Database.Rx</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Colt Alan Bauman</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Reactive extension wrappers for Xamarin's Firebase Database package (iOS and Android).</description>
-    <releaseNotes>Methods to read data from Firebase Database.</releaseNotes>
+    <projectUrl>https://github.com/cabauman/FirebaseDatabaseRx</projectUrl>
+    <releaseNotes>
+      Fix the return value of AddListenerForSingleZippedEvent (Android).
+      Specifically, set the dictionary keys as a relative path, instead of just a node key.
+    </releaseNotes>
     <copyright>Copyright © 2017 Colt Alan Bauman</copyright>
     <dependencies>
       <group targetFramework="Xamarin.iOS10">
