@@ -1,7 +1,7 @@
 # FirebaseDatabaseRx
 Reactive extension wrappers for Xamarin's Firebase Database package (iOS and Android).
 
-Nuget Link: https://www.nuget.org/packages/GameCtor.Firebase.Database.Rx/1.0.0
+Nuget Link: https://www.nuget.org/packages/GameCtor.Firebase.Database.Rx
 
 ## Based On
 Xamarin.Firebase.Database (Android): https://www.nuget.org/packages/Xamarin.Firebase.Database/42.1021.1
@@ -82,14 +82,23 @@ _subscriber = observer
 #### Retrieve data at specified locations. Returns once, only when all data has been retrieved. All references are fetched concurrently, with the help of SubscribeOn.
 
 ```C#
-var observer = FirebaseDatabaseUtils.AddListenerForSingleZippedEvent(_dbRef, _dbRef2, _dbRef3);
+var observer = FirebaseDatabaseUtils.AddListenerForSingleZippedEvent(_dbRef1, _dbRef2, _dbRef3);
 _subscriber = observer
     .ObserveOn(Scheduler.Default)
     .Subscribe(
-        map =>
+        snapshotMap =>
         {
-            _snapshotMap = map;
-            Console.WriteLine(map.Values.ToString());
+            var dbRef1Snapshot = snapshotMap[_dbRef1.GetUrl()];
+            if(dbRef1Snapshot.Exists)
+            {
+                // Do what you want with the snapshot
+            }
+            
+            var dbRef2Snapshot = snapshotMap[_dbRef2.GetUrl()];
+            if(dbRef2Snapshot.Exists)
+            {
+                // Do what you want with the snapshot
+            }
         },
         error =>
         {
