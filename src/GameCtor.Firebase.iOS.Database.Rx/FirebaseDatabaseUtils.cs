@@ -16,24 +16,20 @@ namespace GameCtor.Firebase.Database.Rx
         /// </summary>
         /// <param name="dbQueries"></param>
         /// <returns>Returns a dictionary of DataSnapshots that can be accessed via the reference url.</returns>
-        public static IObservable<Dictionary<string, DataSnapshot>> ObserveSingleZippedEvent(params DatabaseQuery[] dbQueries)
+        public static IObservable<IDictionary<string, DataSnapshot>> ObserveSingleZippedEvent(params DatabaseQuery[] dbQueries)
         {
-            var observables = new List<IObservable<DataSnapshot>>();
+            IObservable<DatabaseQuery> dbQueryObservable = dbQueries
+                .ToObservable();
 
-            foreach(var query in dbQueries)
-            {
-                var observable = query.ObserveSingleEventRx(DataEventType.Value)
-                    .SubscribeOn(Scheduler.Default);
-                observables.Add(observable);
-            }
+            IObservable<DataSnapshot> snapshotObservable = dbQueryObservable
+                .SelectMany(x => x.ObserveSingleEventRx(DataEventType.Value));
 
-            return observables
-                .Zip()
-                .Select(snapshots =>
-                {
-                    return dbQueries.Zip(snapshots, (query, snap) => new { Key = query.Reference.Url, Value = snap })
-                        .ToDictionary(x => x.Key, x => x.Value);
-                });
+            return Observable
+                .Zip(
+                    dbQueryObservable,
+                    snapshotObservable,
+                    (query, snap) => new { Key = query.Reference.Url, Value = snap })
+                .ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }
