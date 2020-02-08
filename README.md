@@ -4,7 +4,7 @@ Reactive extension wrappers for Xamarin's Firebase Database package (iOS and And
 Nuget Link: https://www.nuget.org/packages/GameCtor.Firebase.Database.Rx
 
 ## Based On
-Xamarin.Firebase.Database (Android): https://www.nuget.org/packages/Xamarin.Firebase.Database/42.1021.1
+Xamarin.Firebase.Database (Android): https://www.nuget.org/packages/Xamarin.Firebase.Database
 
 Firebase Database for iOS: https://components.xamarin.com/view/firebaseiosdatabase
 
